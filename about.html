@@ -1,0 +1,107 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Mind's Eye | NLP{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .navbar {
+            background-color: powderblue;
+            border: none;
+            border-radius: 0px;
+        }
+
+        .navbar a {
+            color: white !important;
+        }
+
+        .navbar a:hover {
+            color: bisque;
+        }
+
+        .navbar-toggle {
+            border: 1px solid white !important;
+        }
+
+        .navbar-header button:hover {
+            background-color: lightblue !important;
+        }
+
+        .navbar-collapse {
+            border: none;
+        }
+
+        .btn-dark {
+            background-color: powderblue !important;
+        }
+
+        button {
+            color: lightblue !important;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .top-info {
+            height: 100px;
+            overflow-y: scroll;
+            margin-top: -1px;
+        }
+
+        .bottom-info {
+            padding-top: 20px;
+        }
+
+        #line-graph {
+            width: 800px;
+        }
+
+        #radar-chart {
+            width: 800px;
+        }
+    </style>
+{% endblock %}
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="/">Mind's Eye</a></div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ cur }}">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="http://www.reddit.com/r/{{ top }}">r/{{ top }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>Inspiration</h2>
+Mind's Eye refers to a mental image conceived. Our mind is enclosed, sometimes glimpsed at through medical imaging. Much of the functional processes need to be conveyed in order to be better comprehended. I actually had an idea to use natural language processing (NLP) awhile back to investigate mental illnesses. Understanding the mental particularities of those suffering chronic mental illnesses in a more automated fashion would help health care providers in addressing the concerns of the community. In June of this year, I found that a group of researchers at Emory and Harvard had the same idea of using linguistic analysis as another novel means of identifying those (who self-label) with schizophrenia (on Reddit). They've since published their paper in npj Schizophrenia.
+
+        <h2>What it does</h2>
+Mind's Eye can operate both as a self-management tool or one for exploratory analysis. With the aid of a certified counsellor or psychologist/psychiatrist, it can even be incorporated into future therapeutic use. Right now, Mind's Eye utilizes Reddit's API to query subreddits for posts from various user groups. The two subreddits used in this demo are r/MentalHealth and r/CasualConversation. A user of this web app may be able to log his or her thoughts in the future for self-management purposes. However, in order to demo this app, I have opted to use data that was already available to illustrate potential analytics / insights.
+
+        <h2>How I built it</h2>
+Mind's Eye was built entirely in Python, using Flask as a web framework, in the PyCharm IDE. HTML templating was used for the visual. The graphs are interactive, with new data queried/added and computed upon pagination. Hovering over the data points reveals a tool tip with their particular values. The data points are also selectable and deselectable in order to emphasize or isolate certain entries. The dates however are pseudo-generated, for demo purposes.
+
+        <h2>Challenges I ran into</h2>
+PRAW (the Python Reddit API Wrapper) was rather finicky to work with in terms of slow queries, and incomplete Reddit submission structure due to deleted comments, etc. I also thought about including a profanity filter for demo purposes due to some of the more graphic languages found in a few users' posts, but that would increase computation time and may slow down page rendering.
+
+        <h2>Accomplishments that I'm proud of</h2>
+This was an original project idea that came from trying to understand more about how data scientists are to leverage publicly available data within an ethical means. It was also my first foray into Natural Language Processing, and realizing that I had another potential toolkit for addressing modern healthcare concerns. This was also my first time using Flask, and I absolutely loved its ease of use in rapid prototyping. PyGal was another fantastic Python package that I came across today for graphing and visualization purposes. All in all, much of this project was a 'first' for me.
+
+        <h2>What I learned</h2>
+I learned that just because there is an abundance of information, one still has to look at it very critically and ask careful questions. During the Part-of-Speech (POS) Tagging Analysis, I had originally aggregated the various sub-tags so that they shared broader categories, but found that by doing so, I was not able to differentiate between the two Reddit subreddits (r/CasualConversation and r/MentalHealth) as readily as in Sentiment Analysis. By focusing on just the verbal tenses and modifiers, it would appear that Reddit users in the r/MentalHealth subreddit were less expressive in certain time orientations.
+
+        <h2>What's next for Mind's Eye</h2>
+Halfway through this event, my laptop started warning me that I was critically low in disk space! I would have loved to use WordNet for a more nuanced analysis of the lexicon in order to classify certain affective processes such as anger, anxiety, and sadness; as well as identify categories of personal concerns, such as work, leisure, home, finance, or death. The next step would also be to build a machine learning classifier to predict those who are likely to self-identify with having a mental illness and to suggest or conduct a plausible course of therapy via remote counselling.
+    </div>
+{% endblock %}
