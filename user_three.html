@@ -1,0 +1,118 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}NLP{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .navbar {
+            background-color: powderblue;
+            border: none;
+            border-radius: 0px;
+        }
+
+        .navbar a {
+            color: white !important;
+        }
+
+        .navbar a:hover {
+            color: bisque;
+        }
+
+        .navbar-toggle {
+            border: 1px solid white !important;
+        }
+
+        .navbar-header button:hover {
+            background-color: lightblue !important;
+        }
+
+        .navbar-collapse {
+            border: none;
+        }
+
+        .btn-dark {
+            background-color: powderblue !important;
+        }
+
+        button {
+            color: lightblue !important;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .top-info {
+            height: 100px;
+            overflow-y: scroll;
+            margin-top: -1px;
+        }
+
+        .bottom-info {
+            padding-top: 20px;
+        }
+
+        #line-graph {
+            width: 800px;
+        }
+
+        #radar-chart {
+            width: 800px;
+        }
+    </style>
+{% endblock %}
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="/">Mind's Eye</a></div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h2>{{ rdate }}</h2>
+        <div class="page-header top-info">
+            <strong>{{ rst }}</strong><br/>
+            <p>{{ rss }}</p>
+        </div>
+
+        <div align="center">
+            {% if next > 2 %}
+                <button type="button" class="btn btn-link"><a href="{{ cur - 1 }}">&lt;&lt;</a></button>
+            {% endif %}
+            {% for i in range(1,next) %}
+                {% if cur == i %}
+                    <button type="button" class="btn btn-dark"><a href="{{ i }}">{{ i }}</a></button>
+                {% else %}
+                    <button type="button" class="btn btn-link"><a href="{{ i }}">{{ i }}</a></button>
+                {% endif %}
+            {% endfor %}
+            <button type="button" class="btn btn-link"><a href="{{ cur + 1 }}">&gt;&gt;</a></button>
+        </div>
+
+        <div class="bottom-info">
+            <h3>Sentiment Analysis</h3>
+            <div id="line-graph" align="center">
+                <embed type="image/svg+xml" src={{ graph_data|safe }} style='max-width:600px'/>
+            </div>
+            <hr/>
+            <h3>Part-of-Speech Tagging</h3>
+            <div id="radar-chart" align="center">
+                <embed type="image/svg+xml" src={{ graph_data2|safe }} style='max-width:600px'/>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
