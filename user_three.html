@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}NLP{% endblock %}
+{% block title %}Mind's Eye | NLP{% endblock %}
 {% block head %}
     {{ super() }}
     <style>
@@ -73,8 +73,9 @@
                 <a class="navbar-brand" href="/">Mind's Eye</a></div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/">About</a></li>
+                    <li><a href="{{ cur }}">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="http://www.reddit.com/r/{{ top }}">r/{{ top }}</a></li>
                 </ul>
             </div>
         </div>
